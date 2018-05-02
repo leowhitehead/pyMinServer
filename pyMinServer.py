@@ -1,8 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 configs = {
-    "port": 80
+    "port": 80,
+    "imgExtensions": ("jpeg", "jpg", "exif", "tff", "gif", "bmp", "png", "eps")
 }
+
 
 class handle(BaseHTTPRequestHandler):
     def initialise_text_header(self):
