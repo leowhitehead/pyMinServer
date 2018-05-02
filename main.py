@@ -2,7 +2,7 @@ import pyMinServer
 
 def main(request, **header):
     """A simple example site demo. main() handles all get requests.
-    'request' is the request path, '**header' is the"""
+    'request' is the request path, '**header' is the header information with the request"""
     print "Request: GET {}".format(request)
     request = request[1:]
     if request in ["", "index", "index.html", "index.htm"]:
