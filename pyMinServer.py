@@ -21,7 +21,6 @@ class handle(BaseHTTPRequestHandler):
         import main
         header = handle.parseHeaders(str(self.headers))
         output = main.main(self.path, **header)
-        print type(output)
         if type(output) == file:
             self.initialise_image_header()
             output = output.read()
