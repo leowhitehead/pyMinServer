@@ -5,7 +5,6 @@ configs = {
     "imgExtensions": ("jpeg", "jpg", "exif", "tff", "gif", "bmp", "png", "eps")
 }
 
-
 class handle(BaseHTTPRequestHandler):
     def initialise_text_header(self):
         self.send_response(200)

@@ -10,7 +10,7 @@ def main(request, **header):
     elif request in ["about", "about.html", "about.htm"]:
         return "<html><h1>About Page</h1><img src=\"image.jpg\"></html>"
     elif request == "image.jpg":
-        return open("image.jpg", "rb")
+        return open("image.jpg", "rb")      #sample image processing
     else:
         return "<html><h1>Error 404</h1><br><p>File Not Found</p></html>"
 
