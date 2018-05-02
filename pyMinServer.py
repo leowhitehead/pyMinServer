@@ -1,8 +1,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 configs = {
-    "port": 80,
-    "imgExtensions": ("jpeg", "jpg", "exif", "tff", "gif", "bmp", "png", "eps")
+    "port": 80
 }
 
 class handle(BaseHTTPRequestHandler):
