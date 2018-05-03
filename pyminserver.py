@@ -1,9 +1,6 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-
-configs = {
-    "port": 80,
-    "imgExtensions": ("jpeg", "jpg", "exif", "tff", "gif", "bmp", "png", "eps")
-}
+import importlib
+import __main__
 
 class handle(BaseHTTPRequestHandler):
     def initialise_text_header(self):
@@ -17,9 +14,9 @@ class handle(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        import main
+        fName = __main__.__file__[0:-3]
         header = handle.parseHeaders(str(self.headers))
-        output = main.main(self.path, **header)
+        output = importlib.import_module(fName).main(self.path, **header)
         if type(output) == file:
             self.initialise_image_header()
             output = output.read()
@@ -37,8 +34,8 @@ class handle(BaseHTTPRequestHandler):
         head = dict(map(lambda x: x.split(": "), head))
         return head
 
-def start(server_class=HTTPServer, handler_class=handle, port=configs["port"]):
+def start(server_class=HTTPServer, handler_class=handle, port=80):
     server_address = ('', port)
     httpServe = server_class(server_address, handler_class)
-    print "Running on http://127.0.0.1:{}/ (Press CTRL+C to quit)".format(configs["port"])
+    print "Running on http://127.0.0.1:{}/ (Press CTRL+C to quit)".format(port)
     httpServe.serve_forever()
