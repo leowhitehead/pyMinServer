@@ -41,4 +41,4 @@ if __name__ == "__main__":
 
 ## Important note:
 
-there must be a function main(request, \**header) in your file, as well as a 'if \__name__ == "\__main__"' encapsulating your 'pyminserver.start() call, otherwise it will not work
+there must be a function `main(request, **header)` in your file, as well as a `if __name__ == "__main__"` encapsulating your `pyminserver.start()` call, otherwise it will not work
