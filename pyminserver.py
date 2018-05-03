@@ -1,4 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from inspect import getargspec, getsource
 import importlib
 import __main__
 
@@ -26,6 +27,7 @@ class handle(BaseHTTPRequestHandler):
 
     def do_HEAD(self):
         self.initialise_text_header()
+        #doesnt do anything yet
 
     @staticmethod
     def parseHeaders(head):
@@ -35,7 +37,20 @@ class handle(BaseHTTPRequestHandler):
         return head
 
 def start(server_class=HTTPServer, handler_class=handle, port=80):
+    try:
+        assert(hasattr(importlib.import_module(__main__.__file__[0:-3]), "main"))
+    except AssertionError:
+        print "Error: No function main() found. Exiting."
+        exit()
+    try:
+        assert(len(tuple(getargspec(importlib.import_module(__main__.__file__[0:-3]).main))[0]) == 1 and type(tuple(getargspec(importlib.import_module(__main__.__file__[0:-3]).main))[2]) == str)
+    except AssertionError:
+        print "Error: Invalid parameters for main(request, **headers). Exiting."
+        exit()
     server_address = ('', port)
     httpServe = server_class(server_address, handler_class)
     print "Running on http://127.0.0.1:{}/ (Press CTRL+C to quit)".format(port)
     httpServe.serve_forever()
+
+if __name__ == "__main__":
+    exit()
