@@ -35,5 +35,10 @@ def main(request, **header):
         return "<html><h1>Error 404</h1><br><p>File Not Found</p></html>"	
 	
 if __name__ == "__main__":	
-    pyMinServer.start()
+    pyminserver.start()
 ```
+
+
+## Important note:
+
+there must be a function main(request, \**header) in your file, as well as a 'if \__name__ == "\__main__"' encapsulating your 'pyminserver.start() call, otherwise it will not work
