@@ -33,7 +33,7 @@ def main(request, **header):
         return "<html><h1>Index of site</h1></html>"		
     elif request in ["about", "about.html", "about.htm"]:		
         return "<html><h1>About Page</h1><img src=\"image.jpg\"></html>"		
-    elif request == "image.jpg":		
+    elif request == "favicon.ico":		
         return open("image.jpg", "rb")      #sample image processing		
     else:		
         return "<html><h1>Error 404</h1><br><p>File Not Found</p></html>"		
@@ -41,3 +41,4 @@ def main(request, **header):
  if __name__ == "__main__":		
      pyminserver.start()
 ```
+Note that all get requests go through this function, not just for pages, so image requests also go through this function. to return an image, use `return open("image.png", "rb")`
