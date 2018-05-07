@@ -11,7 +11,7 @@ PyMinServer works for the dynamic generation of html. Currently it only supports
 Instalation of pyMinServer is simple. Download, clone or paste `pyminserver.py` into your project directory, in another file, use `import pyminserver` to use.
 
 # Usage
-Here is an example of a simple website made in pyminserver.
+In order to minimise boilerplate code and make pyminserver as minimalist and intuitive as possible, only one function exists to modify output. `request` contains the GET path, (/index, /about, /image.jpg), and header contains header information associated with the request. To run the server, use `pyminserver.start()` and specify the port if needed. Here's a simple example:
 
 ```python
 import pyminserver
@@ -22,3 +22,22 @@ def main(request, **header):
 if __name__ == "__main__":
     pyminserver.start(port=5000) #default port is 80 if none is specified
 ````
+
+`pyminserver.start()` does not necessarily have to be in a `if __name__ == "__main__"` conditional, but it it reccomended. Here is another simple example:
+
+```python
+def main(request, **header):		
+    print "Request: GET {}".format(request)		
+    request = request[1:]		
+    if request in ["", "index", "index.html", "index.htm"]:		
+        return "<html><h1>Index of site</h1></html>"		
+    elif request in ["about", "about.html", "about.htm"]:		
+        return "<html><h1>About Page</h1><img src=\"image.jpg\"></html>"		
+    elif request == "image.jpg":		
+        return open("image.jpg", "rb")      #sample image processing		
+    else:		
+        return "<html><h1>Error 404</h1><br><p>File Not Found</p></html>"		
+		
+ if __name__ == "__main__":		
+     pyminserver.start()
+```
