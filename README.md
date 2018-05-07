@@ -13,11 +13,12 @@ Instalation of pyMinServer is simple. Download, clone or paste `pyminserver.py` 
 # Usage
 Here is an example of a simple website made in pyminserver.
 
+```python
+import pyminserver
 
-    import pyminserver
-
-    def main(request, **header):
-	    return "<html><h1>Hello World</h1></html>
+def main(request, **header):
+ return "<html><h1>Hello World</h1></html>
     
-    if __name__ == "__main__":
-        pyminserver.start(port=5000) #default port is 80 if none is specified
+if __name__ == "__main__":
+    pyminserver.start(port=5000) #default port is 80 if none is specified
+````
