@@ -42,3 +42,5 @@ def main(request, **header):
      pyminserver.start()
 ```
 Note that all get requests go through this function, not just for pages, so image requests also go through this function. to return an image, use `return open("image.png", "rb")`
+
+support for handling `POST` requests can be used by implementing a function `post(request, **headers)`
