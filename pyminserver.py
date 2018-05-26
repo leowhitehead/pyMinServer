@@ -27,7 +27,20 @@ class handle(BaseHTTPRequestHandler):
 
     def do_POST(self):
         self.initialise_text_header()
-        #empty for now, coming soon
+        try:
+            assert(hasattr(importlib.import_module(__main__.__file__[0:-3]), "post"))
+        except AssertionError:
+            print "Error: No function post() found. Passing."
+            return
+        try:
+            assert(len(tuple(getargspec(importlib.import_module(__main__.__file__[0:-3]).post))[0]) == 1 and type(tuple(getargspec(importlib.import_module(__main__.__file__[0:-3]).post))[2]) == str)
+        except AssertionError:
+            print "Error: Invalid parameters for post(request, **headers). Passing."
+            return
+        fName = __main__.__file__[0:-3]
+        header = handle.parseHeaders(str(self.headers))
+        output = importlib.import_module(fName).post(self.path, **header)
+        self.wfile.write(output)
 
     @staticmethod
     def parseHeaders(head):
