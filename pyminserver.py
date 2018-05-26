@@ -25,16 +25,13 @@ class handle(BaseHTTPRequestHandler):
             self.initialise_text_header()
         self.wfile.write(output)
 
-    def do_HEAD(self):
+    def do_POST(self):
         self.initialise_text_header()
-        #doesnt do anything yet
+        #empty for now, coming soon
 
     @staticmethod
     def parseHeaders(head):
-        head = head.split("\n")
-        head = [x.replace('\r', "") for x in head if x != ""]
-        head = dict(map(lambda x: x.split(": "), head))
-        return head
+        return dict(map(lambda x: x.split(": "), [x.replace('\r', "") for x in head.split("\n") if x != ""]))
 
 def start(server_class=HTTPServer, handler_class=handle, port=80):
     try:
